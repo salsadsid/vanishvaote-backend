@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import errorHandler from "./middlewares/errorMiddleware.js";
-
+import pollRoutes from "./routes/poll.route.js";
 const app = express();
 dotenv.config();
 
@@ -13,6 +13,8 @@ console.log(mongoose.modelNames());
 app.get("/", (req, res) => {
   res.send("VanishVote is Running");
 });
+
+app.use("/api/polls", pollRoutes);
 
 app.use((req, res, next) => {
   const error = new Error(`Not Found - ${req.originalUrl}`);

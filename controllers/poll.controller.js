@@ -1,4 +1,4 @@
-import { pollService } from "../services/poll.service";
+import { pollService } from "../services/poll.service.js";
 
 async function createPoll(req, res, next) {
   try {
@@ -21,3 +21,5 @@ async function createPoll(req, res, next) {
     next(error);
   }
 }
+
+export default { createPoll };
