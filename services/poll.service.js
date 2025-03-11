@@ -47,6 +47,19 @@ async function reactionService(type, pollId) {
   }
 }
 
+async function commentService(pollId, comment) {
+  try {
+    const comment = new Comment({
+      pollId: req.params.id,
+      text: req.body.text,
+    });
+    await comment.save();
+    return { id: comment._id };
+  } catch (error) {
+    throw new Error(error ? error.message : "Comment failed");
+  }
+}
+
 export const pollService = {
   createPollService,
   getPollByIdService,
