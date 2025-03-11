@@ -38,4 +38,15 @@ async function getPollById(req, res, next) {
   }
 }
 
-export default { createPoll, getPollById };
+async function vote(req, res, next) {
+  try {
+    const { optionIndex: optionId } = req.body;
+    const pollId = req.params.id;
+    const result = await pollService.voteService(pollId, optionId);
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export default { createPoll, getPollById, vote };

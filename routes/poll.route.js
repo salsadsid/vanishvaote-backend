@@ -6,4 +6,6 @@ router.post("/", pollController.createPoll);
 
 router.get("/:id", pollController.getPollById);
 
+router.post("/:id/vote", pollController.vote);
+
 export default router;

@@ -23,7 +23,20 @@ async function getPollByIdService(id) {
   }
 }
 
+async function voteService(pollId, optionId) {
+  try {
+    const result = await Poll.updateOne(
+      { _id: pollId },
+      { $inc: { [`options.${optionId}.votes`]: 1 } }
+    );
+    return result;
+  } catch (error) {
+    throw new Error(error ? error.message : "Vote failed");
+  }
+}
+
 export const pollService = {
   createPollService,
   getPollByIdService,
+  voteService,
 };
