@@ -49,4 +49,15 @@ async function vote(req, res, next) {
   }
 }
 
-export default { createPoll, getPollById, vote };
+async function reaction(req, res, next) {
+  try {
+    const { type } = req.body;
+    const pollId = req.params.id;
+    const result = await pollService.reactionService(type, pollId);
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export default { createPoll, getPollById, vote, reaction };

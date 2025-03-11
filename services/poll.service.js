@@ -35,8 +35,21 @@ async function voteService(pollId, optionId) {
   }
 }
 
+async function reactionService(type, pollId) {
+  try {
+    const result = await Poll.updateOne(
+      { _id: pollId },
+      { $inc: { [`reactions.${type}`]: 1 } }
+    );
+    return result;
+  } catch (error) {
+    throw new Error(error ? error.message : "Reaction failed");
+  }
+}
+
 export const pollService = {
   createPollService,
   getPollByIdService,
   voteService,
+  reactionService,
 };

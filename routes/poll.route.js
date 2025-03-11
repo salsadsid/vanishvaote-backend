@@ -8,4 +8,6 @@ router.get("/:id", pollController.getPollById);
 
 router.post("/:id/vote", pollController.vote);
 
+router.patch("/:id/reaction", pollController.reaction);
+
 export default router;
