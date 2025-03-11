@@ -22,4 +22,20 @@ async function createPoll(req, res, next) {
   }
 }
 
-export default { createPoll };
+async function getPollById(req, res, next) {
+  try {
+    const pollId = req.params.id;
+    console.log(pollId);
+    const poll = await pollService.getPollByIdService(pollId);
+
+    if (poll === "Poll expired or not found") {
+      return res.status(404).json({ message: poll });
+    }
+
+    res.status(200).json(poll);
+  } catch (error) {
+    next(error);
+  }
+}
+
+export default { createPoll, getPollById };
